@@ -44,7 +44,7 @@ function the_site_icon( string $dir_url ) {
  * @return string The title.
  */
 function get_the_title( bool $is_site_name_appended, string $separator ): string {
-	$site_name = \wpinc\social\get_site_name();
+	$site_name = get_site_name();
 	if ( ! is_front_page() && is_singular() ) {
 		$title = _strip_custom_tags( \get_the_title() );
 		if ( $is_site_name_appended ) {
