@@ -4,10 +4,10 @@
  *
  * @package Wpinc Social
  * @author Takuto Yanagida
- * @version 2021-03-28
+ * @version 2021-03-29
  */
 
-namespace wpinc\social;
+namespace wpinc\social\site_meta;
 
 /**
  * Output the site description.
@@ -15,6 +15,20 @@ namespace wpinc\social;
 function the_site_description() {
 	?>
 	<meta name="description" content="<?php echo esc_attr( get_site_description() ); ?>">
+	<?php
+}
+
+/**
+ * Output the site icon images.
+ *
+ * @param string $dir_url The url to image directory.
+ */
+function the_site_icon( string $dir_url ) {
+	$dir_url = trailingslashit( $dir_url );
+	?>
+	<link rel="icon" href="<?php echo esc_attr( $dir_url . 'favicon.ico' ); ?>">
+	<link rel="icon" type="image/png" href="<?php echo esc_attr( $dir_url . 'icon-192.png' ); ?>">
+	<link rel="apple-touch-icon" type="image/png" href="<?php echo esc_attr( $dir_url . 'icon-180.png' ); ?>">
 	<?php
 }
 

@@ -4,12 +4,12 @@
  *
  * @package Wpinc Social
  * @author Takuto Yanagida
- * @version 2021-03-27
+ * @version 2021-03-29
  */
 
 namespace wpinc\social\share_link;
 
-require_once __DIR__ . '/site-info.php';
+require_once __DIR__ . '/site-meta.php';
 
 /**
  * The templates of social media sharing links.
@@ -54,8 +54,8 @@ function the_share_links( array $args = array() ) {
 		'separator'             => ' - ',
 		'media'                 => array( 'facebook', 'twitter', 'pocket', 'line', 'copy' ),
 	);
-	$title = \wpinc\social\get_the_title( $args['is_site_name_appended'], $args['separator'] );
-	$url   = \wpinc\social\get_current_url();
+	$title = \wpinc\social\site_meta\get_the_title( $args['is_site_name_appended'], $args['separator'] );
+	$url   = \wpinc\social\site_meta\get_current_url();
 
 	$search  = array( '<U>', '<T>' );
 	$replace = array( rawurlencode( $title ), rawurlencode( $url ) );

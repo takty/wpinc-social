@@ -4,12 +4,12 @@
  *
  * @package Wpinc Social
  * @author Takuto Yanagida
- * @version 2021-03-28
+ * @version 2021-03-29
  */
 
 namespace wpinc\social\ogp;
 
-require_once __DIR__ . '/site-info.php';
+require_once __DIR__ . '/site-meta.php';
 
 const OGP_NS = 'prefix="og:http://ogp.me/ns#"';
 
@@ -45,10 +45,10 @@ function the_ogp( array $args = array() ) {
 	$tw_card = has_post_thumbnail() ? 'summary_large_image' : 'summary';
 	?>
 	<meta property="og:type" content="<?php echo esc_attr( is_single() ? 'article' : 'website' ); ?>">
-	<meta property="og:url" content="<?php echo esc_attr( \wpinc\social\get_current_url() ); ?>">
-	<meta property="og:title" content="<?php echo esc_attr( \wpinc\social\get_the_title( $args['is_site_name_appended'], $args['separator'] ) ); ?>">
+	<meta property="og:url" content="<?php echo esc_attr( \wpinc\social\site_meta\get_current_url() ); ?>">
+	<meta property="og:title" content="<?php echo esc_attr( \wpinc\social\site_meta\get_the_title( $args['is_site_name_appended'], $args['separator'] ) ); ?>">
 	<meta property="og:description" content="<?php echo esc_attr( _get_the_description( $args['excerpt_length'], $args['alt_description'] ) ); ?>">
-	<meta property="og:site_name" content="<?php echo esc_attr( \wpinc\social\get_site_name() ); ?>">
+	<meta property="og:site_name" content="<?php echo esc_attr( \wpinc\social\site_meta\get_site_name() ); ?>">
 	<?php if ( ! empty( $img_url ) ) : ?>
 	<meta property="og:image" content="<?php echo esc_attr( $img_url ); ?>">
 		<?php if ( class_exists( 'Simply_Static\Plugin' ) ) : ?>
@@ -88,7 +88,7 @@ function _get_the_description( int $excerpt_length, string $alt_description ): s
 		}
 	}
 	if ( empty( $desc ) ) {
-		$desc = \wpinc\social\get_site_description() || \wpinc\social\get_site_name();
+		$desc = \wpinc\social\site_meta\get_site_description() || \wpinc\social\site_meta\get_site_name();
 	}
 	return $desc;
 }

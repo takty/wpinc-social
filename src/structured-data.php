@@ -4,12 +4,12 @@
  *
  * @package Wpinc Social
  * @author Takuto Yanagida
- * @version 2021-03-28
+ * @version 2021-03-29
  */
 
 namespace wpinc\social\structured_data;
 
-require_once __DIR__ . '/site-info.php';
+require_once __DIR__ . '/site-meta.php';
 
 /**
  * Output the structured data.
@@ -34,13 +34,13 @@ function the_structured_data( array $args = array() ) {
 			'@context'    => 'http://schema.org',
 			'@type'       => 'WebSite',
 			'url'         => home_url(),
-			'name'        => \wpinc\social\get_site_name(),
+			'name'        => \wpinc\social\site_meta\get_site_name(),
 			'inLanguage'  => get_locale(),
-			'description' => \wpinc\social\get_site_description(),
+			'description' => \wpinc\social\site_meta\get_site_description(),
 			'sameAs'      => array(),
 			'publisher'   => array(
 				'@type' => 'Organization',
-				'name'  => \wpinc\social\get_site_name(),
+				'name'  => \wpinc\social\site_meta\get_site_name(),
 				'logo'  => '',
 			),
 		),
