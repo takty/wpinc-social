@@ -56,6 +56,9 @@ function the_structured_data( array $args = array() ) {
 	<script type="application/ld+json">
 	<?php echo $json;  // phpcs:disable ?>
 	</script>
+	<?php if ( isset( $args['publisher']['logo'] ) && class_exists( 'Simply_Static\Plugin' ) ) : ?>
+	<link href="<?php echo esc_attr( $args['publisher']['logo'] ); ?>"><!-- for simply static -->
+	<?php endif; ?>
 	<?php
 }
 

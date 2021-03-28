@@ -52,7 +52,7 @@ function the_ogp( array $args = array() ) {
 	<?php if ( ! empty( $img_url ) ) : ?>
 	<meta property="og:image" content="<?php echo esc_attr( $img_url ); ?>">
 		<?php if ( class_exists( 'Simply_Static\Plugin' ) ) : ?>
-		<link href="<?php echo esc_attr( $img_url ); ?>">
+		<link href="<?php echo esc_attr( $img_url ); ?>"><!-- for simply static -->
 		<?php endif; ?>
 	<?php endif; ?>
 	<meta name="twitter:card" content="<?php echo esc_attr( $tw_card ); ?>">
