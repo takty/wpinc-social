@@ -51,10 +51,10 @@ function the_structured_data( array $args = array() ) {
 		unset( $args['logo'] );
 	}
 	$args = _remove_empty_entry( $args );
-	$json = wp_json_encode( $args, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT );
+	$json = wp_json_encode( $args, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT | JSON_HEX_TAG );
 	?>
 	<script type="application/ld+json">
-	<?php echo esc_html( $json ); ?>
+	<?php echo $json;  // phpcs:disable ?>
 	</script>
 	<?php
 }
