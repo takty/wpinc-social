@@ -4,7 +4,7 @@
  *
  * @package Wpinc Social
  * @author Takuto Yanagida
- * @version 2021-03-27
+ * @version 2021-03-28
  */
 
 namespace wpinc\social\structured_data;
@@ -71,7 +71,7 @@ function _remove_empty_entry( array $array ): array {
 	$ret = array();
 	foreach ( $array as $key => $val ) {
 		if ( is_array( $val ) ) {
-			$val = remove_empty_entry( $val );
+			$val = _remove_empty_entry( $val );
 		}
 		if ( ! empty( $val ) ) {
 			if ( is_int( $key ) ) {

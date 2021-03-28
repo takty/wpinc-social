@@ -51,7 +51,7 @@ function the_ogp( array $args = array() ) {
 	<meta property="og:site_name" content="<?php echo esc_attr( \wpinc\social\get_site_name() ); ?>">
 	<?php if ( ! empty( $img_url ) ) : ?>
 	<meta property="og:image" content="<?php echo esc_attr( $img_url ); ?>">
-		<?php if ( function_exists( 'simply_static_run_plugin' ) ) : ?>
+		<?php if ( class_exists( 'Simply_Static\Plugin' ) ) : ?>
 		<link href="<?php echo esc_attr( $img_url ); ?>">
 		<?php endif; ?>
 	<?php endif; ?>
@@ -83,8 +83,8 @@ function _get_the_description( int $excerpt_length, string $alt_description ): s
 
 		$desc = wp_strip_all_tags( str_replace( array( "\r\n", "\r", "\n" ), ' ', $text ), true );
 		$desc = preg_replace( '/\A[\p{C}\p{Z}]++|[\p{C}\p{Z}]++\z/u', '', $desc );  // Multi-byte trim.
-		if ( mb_strlen( $desc ) > $max_length ) {
-			$desc = mb_substr( $desc, 0, $max_length - 3 ) . '...';
+		if ( mb_strlen( $desc ) > $excerpt_length ) {
+			$desc = mb_substr( $desc, 0, $excerpt_length - 3 ) . '...';
 		}
 	}
 	if ( empty( $desc ) ) {

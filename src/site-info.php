@@ -4,7 +4,7 @@
  *
  * @package Wpinc Social
  * @author Takuto Yanagida
- * @version 2021-03-27
+ * @version 2021-03-28
  */
 
 namespace wpinc\social;
@@ -32,7 +32,7 @@ function the_site_description() {
 function get_the_title( bool $is_site_name_appended, string $separator ): string {
 	$site_name = \wpinc\social\get_site_name();
 	if ( ! is_front_page() && is_singular() ) {
-		$title = _strip_custom_tags( get_the_title() );
+		$title = _strip_custom_tags( \get_the_title() );
 		if ( $is_site_name_appended ) {
 			$title .= $separator . $site_name;
 		}

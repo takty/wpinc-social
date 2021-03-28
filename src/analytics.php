@@ -4,7 +4,7 @@
  *
  * @package Wpinc Social
  * @author Takuto Yanagida
- * @version 2021-03-27
+ * @version 2021-03-28
  */
 
 namespace wpinc\social\analytics;
@@ -33,7 +33,7 @@ function the_google_analytics_code( string $tracking = '', string $verification 
 function _echo_warning() {
 	?>
 	<script>
-	document.addEventListener('load',()=>{
+	window.addEventListener('load',()=>{
 		const e=document.body.appendChild(document.createElement('div'));
 		e.innerText='No analytics code is set!';const s=e.style;
 		s.position='fixed';s.right='0';s.bottom='0';s.background='red';
