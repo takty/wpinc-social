@@ -42,7 +42,7 @@ function the_ogp( array $args = array() ) {
 	);
 
 	$img_url = _get_the_image( $args['default_image_url'], $args['image_size'], $args['image_meta_key'], $args['alt_image_url'] );
-	$tw_card = has_post_thumbnail() ? 'summary_large_image' : 'summary';
+	$tw_card = empty( $img_url ) ? 'summary' : 'summary_large_image';
 	?>
 	<meta property="og:type" content="<?php echo esc_attr( is_single() ? 'article' : 'website' ); ?>">
 	<meta property="og:url" content="<?php echo esc_attr( \wpinc\social\site_meta\get_current_url() ); ?>">
