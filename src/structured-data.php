@@ -52,14 +52,11 @@ function the_structured_data( array $args = array() ) {
 	}
 	$args = _remove_empty_entry( $args );
 	$json = wp_json_encode( $args, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT | JSON_HEX_TAG );
-	?>
-	<script type="application/ld+json">
-	<?php echo $json;  // phpcs:disable ?>
-	</script>
-	<?php if ( isset( $args['publisher']['logo'] ) && class_exists( 'Simply_Static\Plugin' ) ) : ?>
-	<link href="<?php echo esc_attr( $args['publisher']['logo'] ); ?>"><!-- for simply static -->
-	<?php endif; ?>
-	<?php
+	echo '<script type="application/ld+json">' . "\n$json\n" . '</script>' . "\n";  // phpcs:disable
+
+	if ( isset( $args['publisher']['logo'] ) && class_exists( 'Simply_Static\Plugin' ) ) {
+		echo '<link href="' . esc_attr( $args['publisher']['logo'] ) . '"><!-- for simply static -->' . "\n";
+	}
 }
 
 /**

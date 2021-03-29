@@ -43,20 +43,20 @@ function the_ogp( array $args = array() ) {
 
 	$img_url = _get_the_image( $args['default_image_url'], $args['image_size'], $args['image_meta_key'], $args['alt_image_url'] );
 	$tw_card = empty( $img_url ) ? 'summary' : 'summary_large_image';
-	?>
-	<meta property="og:type" content="<?php echo esc_attr( is_single() ? 'article' : 'website' ); ?>">
-	<meta property="og:url" content="<?php echo esc_attr( \wpinc\social\site_meta\get_current_url() ); ?>">
-	<meta property="og:title" content="<?php echo esc_attr( \wpinc\social\site_meta\get_the_title( $args['is_site_name_appended'], $args['separator'] ) ); ?>">
-	<meta property="og:description" content="<?php echo esc_attr( _get_the_description( $args['excerpt_length'], $args['alt_description'] ) ); ?>">
-	<meta property="og:site_name" content="<?php echo esc_attr( \wpinc\social\site_meta\get_site_name() ); ?>">
-	<?php if ( ! empty( $img_url ) ) : ?>
-	<meta property="og:image" content="<?php echo esc_attr( $img_url ); ?>">
-		<?php if ( class_exists( 'Simply_Static\Plugin' ) ) : ?>
-		<link href="<?php echo esc_attr( $img_url ); ?>"><!-- for simply static -->
-		<?php endif; ?>
-	<?php endif; ?>
-	<meta name="twitter:card" content="<?php echo esc_attr( $tw_card ); ?>">
-	<?php
+
+	echo '<meta property="og:type" content="' . esc_attr( is_single() ? 'article' : 'website' ) . '">' . "\n";
+	echo '<meta property="og:url" content="' . esc_attr( \wpinc\social\site_meta\get_current_url() ) . '">' . "\n";
+	echo '<meta property="og:title" content="' . esc_attr( \wpinc\social\site_meta\get_the_title( $args['is_site_name_appended'], $args['separator'] ) ) . '">' . "\n";
+	echo '<meta property="og:description" content="' . esc_attr( _get_the_description( $args['excerpt_length'], $args['alt_description'] ) ) . '">' . "\n";
+	echo '<meta property="og:site_name" content="' . esc_attr( \wpinc\social\site_meta\get_site_name() ) . '">' . "\n";
+
+	if ( ! empty( $img_url ) ) {
+		echo '<meta property="og:image" content="' . esc_attr( $img_url ) . '">' . "\n";
+		if ( class_exists( 'Simply_Static\Plugin' ) ) {
+			echo '<link href="' . esc_attr( $img_url ) . '"><!-- for simply static -->' . "\n";
+		}
+	}
+	echo '<meta name="twitter:card" content="' . esc_attr( $tw_card ) . '">' . "\n";
 }
 
 /**
@@ -88,7 +88,10 @@ function _get_the_description( int $excerpt_length, string $alt_description ): s
 		}
 	}
 	if ( empty( $desc ) ) {
-		$desc = \wpinc\social\site_meta\get_site_description() || \wpinc\social\site_meta\get_site_name();
+		$desc = \wpinc\social\site_meta\get_site_description();
+	}
+	if ( empty( $desc ) ) {
+		$desc = \wpinc\social\site_meta\get_site_name();
 	}
 	return $desc;
 }

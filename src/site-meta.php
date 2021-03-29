@@ -13,9 +13,7 @@ namespace wpinc\social\site_meta;
  * Output the site description.
  */
 function the_site_description() {
-	?>
-	<meta name="description" content="<?php echo esc_attr( get_site_description() ); ?>">
-	<?php
+	echo '<meta name="description" content="' . esc_attr( get_site_description() ) . '">' . "\n";
 }
 
 /**
@@ -25,11 +23,9 @@ function the_site_description() {
  */
 function the_site_icon( string $dir_url ) {
 	$dir_url = trailingslashit( $dir_url );
-	?>
-	<link rel="icon" href="<?php echo esc_attr( $dir_url . 'favicon.ico' ); ?>">
-	<link rel="icon" type="image/png" href="<?php echo esc_attr( $dir_url . 'icon-192.png' ); ?>">
-	<link rel="apple-touch-icon" type="image/png" href="<?php echo esc_attr( $dir_url . 'icon-180.png' ); ?>">
-	<?php
+	echo '<link rel="icon" href="' . esc_attr( $dir_url . 'favicon.ico' ) . '">' . "\n";
+	echo '<link rel="icon" type="image/png" href="' . esc_attr( $dir_url . 'icon-192.png' ) . '">' . "\n";
+	echo '<link rel="apple-touch-icon" type="image/png" href="' . esc_attr( $dir_url . 'icon-180.png' ) . '">' . "\n";
 }
 
 
