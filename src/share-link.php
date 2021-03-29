@@ -4,7 +4,7 @@
  *
  * @package Wpinc Social
  * @author Takuto Yanagida
- * @version 2021-03-29
+ * @version 2021-03-30
  */
 
 namespace wpinc\social\share_link;
@@ -57,7 +57,7 @@ function the_share_links( array $args = array() ) {
 	$title = \wpinc\social\site_meta\get_the_title( $args['is_site_name_appended'], $args['separator'] );
 	$url   = \wpinc\social\site_meta\get_current_url();
 
-	$search  = array( '<U>', '<T>' );
+	$search  = array( '<T>', '<U>' );
 	$replace = array( rawurlencode( $title ), rawurlencode( $url ) );
 
 	$ret = '';
@@ -67,15 +67,15 @@ function the_share_links( array $args = array() ) {
 			$href = str_replace( $search, $replace, $href );
 			$lab  = is_string( $lab ) ? $lab : ucfirst( $media );
 			$link = '<a href="' . esc_url( $href ) . '">' . $lab . '</a>';
-			$ret .= $args['before_link'] . $link . $args['after_link'];
+			$ret .= $args['before_link'] . $link . $args['after_link'] . "\n";
 		} elseif ( 'copy' === $media ) {
 			$lab  = is_string( $lab ) ? $lab : ucfirst( $media );
-			$link = sprintf( '<a data-url="%s" data-title="%s" onclick="%s">%s</a>', esc_url( $url ), esc_attr( $title ), esc_attr( ON_CLICK_JS ), $lab );
-			$ret .= $args['before_link'] . $link . $args['after_link'];
+			$link = sprintf( '<a data-url="%s" data-title="%s" onclick="%s">%s</a>', esc_url( $url ), esc_attr( $title ), ON_CLICK_JS, $lab );
+			$ret .= $args['before_link'] . $link . $args['after_link'] . "\n";
 		}
 	}
 	$tags = wp_kses_allowed_html( 'post' );
 
 	$tags['a']['onclick'] = true;
-	echo wp_kses( $args['before'] . $ret . $args['after'], $tags );
+	echo wp_kses( $args['before'] . "\n$ret" . $args['after'] . "\n", $tags );
 }
