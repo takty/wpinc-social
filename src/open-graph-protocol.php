@@ -4,7 +4,7 @@
  *
  * @package Wpinc Socio
  * @author Takuto Yanagida
- * @version 2021-03-29
+ * @version 2021-04-04
  */
 
 namespace wpinc\socio\ogp;
@@ -17,16 +17,16 @@ const OGP_NS = 'prefix="og:http://ogp.me/ns#"';
  * Output the open graph protocol meta tags.
  *
  * @param array $args {
- *     Options.
+ *     (Optional) Options.
  *
  *     @type string $default_image_url     Default image URL.
- *     @type bool   $is_site_name_appended (Optional) Whether the site name is appended.
- *     @type string $separator             (Optional) Separator between the page title and the site name.
- *     @type int    $excerpt_length        (Optional) The length of excerpt.
- *     @type string $alt_description       (Optional) Alternative description.
- *     @type string $image_size            (Optional) The image size.
- *     @type string $image_meta_key        (Optional) Meta key of image.
- *     @type string $alt_image_url         (Optional) Alternative image URL.
+ *     @type bool   $is_site_name_appended Whether the site name is appended.
+ *     @type string $separator             Separator between the page title and the site name.
+ *     @type int    $excerpt_length        The length of excerpt.
+ *     @type string $alt_description       Alternative description.
+ *     @type string $image_size            The image size.
+ *     @type string $image_meta_key        Meta key of image.
+ *     @type string $alt_image_url         Alternative image URL.
  * }
  */
 function the_ogp( array $args = array() ) {
