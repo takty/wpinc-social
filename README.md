@@ -1,1 +1,1 @@
-# wpinc-social
+# wpinc-socio

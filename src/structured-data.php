@@ -2,12 +2,12 @@
 /**
  * Structured Data
  *
- * @package Wpinc Social
+ * @package Wpinc Socio
  * @author Takuto Yanagida
  * @version 2021-04-01
  */
 
-namespace wpinc\social\structured_data;
+namespace wpinc\socio\structured_data;
 
 require_once __DIR__ . '/site-meta.php';
 
@@ -34,13 +34,13 @@ function the_structured_data( array $args = array() ) {
 			'@context'    => 'http://schema.org',
 			'@type'       => 'WebSite',
 			'url'         => home_url(),
-			'name'        => \wpinc\social\site_meta\get_site_name(),
+			'name'        => \wpinc\socio\site_meta\get_site_name(),
 			'inLanguage'  => get_locale(),
-			'description' => \wpinc\social\site_meta\get_site_description(),
+			'description' => \wpinc\socio\site_meta\get_site_description(),
 			'sameAs'      => array(),
 			'publisher'   => array(
 				'@type' => 'Organization',
-				'name'  => \wpinc\social\site_meta\get_site_name(),
+				'name'  => \wpinc\socio\site_meta\get_site_name(),
 				'logo'  => '',
 			),
 		),

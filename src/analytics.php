@@ -2,12 +2,12 @@
 /**
  * Analytics
  *
- * @package Wpinc Social
+ * @package Wpinc Socio
  * @author Takuto Yanagida
  * @version 2021-03-28
  */
 
-namespace wpinc\social\analytics;
+namespace wpinc\socio\analytics;
 
 /**
  * Output google analytics code.

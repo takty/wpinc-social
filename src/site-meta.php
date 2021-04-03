@@ -2,12 +2,12 @@
 /**
  * Site Information
  *
- * @package Wpinc Social
+ * @package Wpinc Socio
  * @author Takuto Yanagida
  * @version 2021-03-29
  */
 
-namespace wpinc\social\site_meta;
+namespace wpinc\socio\site_meta;
 
 /**
  * Output the site description.

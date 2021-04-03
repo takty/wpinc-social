@@ -1,5 +1,5 @@
 {
-	"name": "wpinc-social",
+	"name": "wpinc-socio",
 	"version": "0.1.0",
 	"description": "The Plug-in of WordPress for Social Media",
 	"author": "Takuto Yanagida",
@@ -9,13 +9,13 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/takty/wpinc-plex.git"
+		"url": "git+https://github.com/takty/wpinc-socio.git"
 	},
 	"license": "MIT",
 	"bugs": {
-		"url": "https://github.com/takty/wpinc-plex/issues"
+		"url": "https://github.com/takty/wpinc-socio/issues"
 	},
-	"homepage": "https://github.com/takty/wpinc-plex#readme",
+	"homepage": "https://github.com/takty/wpinc-socio#readme",
 	"browserslist": [
 		"> 1%",
 		"last 2 versions",

@@ -2,12 +2,12 @@
 /**
  * Share Links of Social Media
  *
- * @package Wpinc Social
+ * @package Wpinc Socio
  * @author Takuto Yanagida
  * @version 2021-03-30
  */
 
-namespace wpinc\social\share_link;
+namespace wpinc\socio\share_link;
 
 require_once __DIR__ . '/site-meta.php';
 
@@ -54,8 +54,8 @@ function the_share_links( array $args = array() ) {
 		'separator'             => ' - ',
 		'media'                 => array( 'facebook', 'twitter', 'pocket', 'line', 'copy' ),
 	);
-	$title = \wpinc\social\site_meta\get_the_title( $args['is_site_name_appended'], $args['separator'] );
-	$url   = \wpinc\social\site_meta\get_current_url();
+	$title = \wpinc\socio\site_meta\get_the_title( $args['is_site_name_appended'], $args['separator'] );
+	$url   = \wpinc\socio\site_meta\get_current_url();
 
 	$search  = array( '<T>', '<U>' );
 	$replace = array( rawurlencode( $title ), rawurlencode( $url ) );

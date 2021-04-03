@@ -2,12 +2,12 @@
 /**
  * Open Graph Protocol
  *
- * @package Wpinc Social
+ * @package Wpinc Socio
  * @author Takuto Yanagida
  * @version 2021-03-29
  */
 
-namespace wpinc\social\ogp;
+namespace wpinc\socio\ogp;
 
 require_once __DIR__ . '/site-meta.php';
 
@@ -45,10 +45,10 @@ function the_ogp( array $args = array() ) {
 	$tw_card = empty( $img_url ) ? 'summary' : 'summary_large_image';
 
 	echo '<meta property="og:type" content="' . esc_attr( is_single() ? 'article' : 'website' ) . '">' . "\n";
-	echo '<meta property="og:url" content="' . esc_attr( \wpinc\social\site_meta\get_current_url() ) . '">' . "\n";
-	echo '<meta property="og:title" content="' . esc_attr( \wpinc\social\site_meta\get_the_title( $args['is_site_name_appended'], $args['separator'] ) ) . '">' . "\n";
+	echo '<meta property="og:url" content="' . esc_attr( \wpinc\socio\site_meta\get_current_url() ) . '">' . "\n";
+	echo '<meta property="og:title" content="' . esc_attr( \wpinc\socio\site_meta\get_the_title( $args['is_site_name_appended'], $args['separator'] ) ) . '">' . "\n";
 	echo '<meta property="og:description" content="' . esc_attr( _get_the_description( $args['excerpt_length'], $args['alt_description'] ) ) . '">' . "\n";
-	echo '<meta property="og:site_name" content="' . esc_attr( \wpinc\social\site_meta\get_site_name() ) . '">' . "\n";
+	echo '<meta property="og:site_name" content="' . esc_attr( \wpinc\socio\site_meta\get_site_name() ) . '">' . "\n";
 
 	if ( ! empty( $img_url ) ) {
 		echo '<meta property="og:image" content="' . esc_attr( $img_url ) . '">' . "\n";
@@ -88,10 +88,10 @@ function _get_the_description( int $excerpt_length, string $alt_description ): s
 		}
 	}
 	if ( empty( $desc ) ) {
-		$desc = \wpinc\social\site_meta\get_site_description();
+		$desc = \wpinc\socio\site_meta\get_site_description();
 	}
 	if ( empty( $desc ) ) {
-		$desc = \wpinc\social\site_meta\get_site_name();
+		$desc = \wpinc\socio\site_meta\get_site_name();
 	}
 	return $desc;
 }
