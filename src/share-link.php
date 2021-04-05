@@ -4,7 +4,7 @@
  *
  * @package Wpinc Socio
  * @author Takuto Yanagida
- * @version 2021-04-04
+ * @version 2021-04-05
  */
 
 namespace wpinc\socio\share_link;
@@ -35,13 +35,13 @@ const ON_CLICK_JS = "navigator.clipboard.writeText(this.dataset.title + ' ' + th
  * @param array $args {
  *     (Optional) Post navigation arguments.
  *
- *     @type string   $before                Markup to prepend to the all links.
- *     @type string   $after                 Markup to append to the all links.
- *     @type string   $before_link           Markup to prepend to each link.
- *     @type string   $after_link            Markup to append to each link.
- *     @type bool     $is_site_name_appended Whether the site name is appended.
- *     @type string   $separator             Separator between the page title and the site name.
- *     @type string[] $media                 Social media names.
+ *     @type string   'before'                Markup to prepend to the all links.
+ *     @type string   'after'                 Markup to append to the all links.
+ *     @type string   'before_link'           Markup to prepend to each link.
+ *     @type string   'after_link'            Markup to append to each link.
+ *     @type bool     'is_site_name_appended' Whether the site name is appended.
+ *     @type string   'separator'             Separator between the page title and the site name.
+ *     @type string[] 'media'                 Social media names.
  * }
  */
 function the_share_links( array $args = array() ) {

@@ -4,7 +4,7 @@
  *
  * @package Wpinc Socio
  * @author Takuto Yanagida
- * @version 2021-04-04
+ * @version 2021-04-05
  */
 
 namespace wpinc\socio\structured_data;
@@ -17,13 +17,13 @@ require_once __DIR__ . '/site-meta.php';
  * @param array $args {
  *     (Optional) The data of the website.
  *
- *     @type string   $url         The URL.
- *     @type string   $name        The name.
- *     @type string   $inLanguage  The locale.
- *     @type string   $description The description.
- *     @type string[] $sameAs      An array of URLs.
- *     @type string   $logo        The URL of the logo image.
- *     @type string[] $publisher {
+ *     @type string   'url'         The URL.
+ *     @type string   'name'        The name.
+ *     @type string   'inLanguage'  The locale.
+ *     @type string   'description' The description.
+ *     @type string[] 'sameAs'      An array of URLs.
+ *     @type string   'logo'        The URL of the logo image.
+ *     @type string[] 'publisher' {
  *         @type string $name The name of the publisher.
  *     }
  * }
