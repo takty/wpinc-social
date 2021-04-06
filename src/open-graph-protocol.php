@@ -4,7 +4,7 @@
  *
  * @package Wpinc Socio
  * @author Takuto Yanagida
- * @version 2021-04-05
+ * @version 2021-04-06
  */
 
 namespace wpinc\socio\ogp;
@@ -60,7 +60,7 @@ function the_ogp( array $args = array() ) {
 }
 
 /**
- * Retrieve the description of the current page.
+ * Retrieves the description of the current page.
  *
  * @access private
  *
@@ -97,7 +97,7 @@ function _get_the_description( int $excerpt_length, string $alt_description ): s
 }
 
 /**
- * Retrieve the image of the current page.
+ * Retrieves the image of the current page.
  *
  * @access private
  *
@@ -127,7 +127,7 @@ function _get_the_image( string $default_image_url, string $size, string $meta_k
 
 /**
  *
- * Retrieve the thumbnail image source.
+ * Retrieves the thumbnail image source.
  *
  * @access private
  *
