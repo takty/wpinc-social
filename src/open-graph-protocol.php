@@ -4,7 +4,7 @@
  *
  * @package Wpinc Socio
  * @author Takuto Yanagida
- * @version 2021-04-06
+ * @version 2021-04-12
  */
 
 namespace wpinc\socio\ogp;
@@ -19,26 +19,26 @@ const OGP_NS = 'prefix="og:http://ogp.me/ns#"';
  * @param array $args {
  *     (Optional) Options.
  *
- *     @type string 'default_image_url'     Default image URL.
- *     @type bool   'is_site_name_appended' Whether the site name is appended.
- *     @type string 'separator'             Separator between the page title and the site name.
- *     @type int    'excerpt_length'        The length of excerpt.
- *     @type string 'alt_description'       Alternative description.
- *     @type string 'image_size'            The image size.
- *     @type string 'image_meta_key'        Meta key of image.
- *     @type string 'alt_image_url'         Alternative image URL.
+ *     @type string 'default_image_url'   Default image URL.
+ *     @type bool   'do_append_site_name' Whether the site name is appended.
+ *     @type string 'separator'           Separator between the page title and the site name.
+ *     @type int    'excerpt_length'      The length of excerpt.
+ *     @type string 'alt_description'     Alternative description.
+ *     @type string 'image_size'          The image size.
+ *     @type string 'image_meta_key'      Meta key of image.
+ *     @type string 'alt_image_url'       Alternative image URL.
  * }
  */
 function the_ogp( array $args = array() ) {
 	$args += array(
-		'is_site_name_appended' => true,
-		'separator'             => ' - ',
-		'excerpt_length'        => 100,
-		'alt_description'       => '',
-		'default_image_url'     => '',
-		'image_size'            => 'large',
-		'image_meta_key'        => '',
-		'alt_image_url'         => '',
+		'do_append_site_name' => true,
+		'separator'           => ' - ',
+		'excerpt_length'      => 100,
+		'alt_description'     => '',
+		'default_image_url'   => '',
+		'image_size'          => 'large',
+		'image_meta_key'      => '',
+		'alt_image_url'       => '',
 	);
 
 	$img_url = _get_the_image( $args['default_image_url'], $args['image_size'], $args['image_meta_key'], $args['alt_image_url'] );
@@ -46,7 +46,7 @@ function the_ogp( array $args = array() ) {
 
 	echo '<meta property="og:type" content="' . esc_attr( is_single() ? 'article' : 'website' ) . '">' . "\n";
 	echo '<meta property="og:url" content="' . esc_attr( \wpinc\socio\site_meta\get_current_url() ) . '">' . "\n";
-	echo '<meta property="og:title" content="' . esc_attr( \wpinc\socio\site_meta\get_the_title( $args['is_site_name_appended'], $args['separator'] ) ) . '">' . "\n";
+	echo '<meta property="og:title" content="' . esc_attr( \wpinc\socio\site_meta\get_the_title( $args['do_append_site_name'], $args['separator'] ) ) . '">' . "\n";
 	echo '<meta property="og:description" content="' . esc_attr( _get_the_description( $args['excerpt_length'], $args['alt_description'] ) ) . '">' . "\n";
 	echo '<meta property="og:site_name" content="' . esc_attr( \wpinc\socio\site_meta\get_site_name() ) . '">' . "\n";
 

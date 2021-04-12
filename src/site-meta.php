@@ -4,7 +4,7 @@
  *
  * @package Wpinc Socio
  * @author Takuto Yanagida
- * @version 2021-04-06
+ * @version 2021-04-12
  */
 
 namespace wpinc\socio\site_meta;
@@ -35,21 +35,21 @@ function the_site_icon( string $dir_url ) {
 /**
  * Retrieves the title of the current page.
  *
- * @param bool   $is_site_name_appended Whether the site name is appended.
- * @param string $separator             Separator between the page title and the site name.
+ * @param bool   $do_append_site_name Whether the site name is appended.
+ * @param string $separator           Separator between the page title and the site name.
  * @return string The title.
  */
-function get_the_title( bool $is_site_name_appended, string $separator ): string {
+function get_the_title( bool $do_append_site_name, string $separator ): string {
 	$site_name = get_site_name();
 	if ( ! is_front_page() && is_singular() ) {
 		$title = _strip_custom_tags( \get_the_title() );
-		if ( $is_site_name_appended ) {
+		if ( $do_append_site_name ) {
 			$title .= $separator . $site_name;
 		}
 		return $title;
 	} elseif ( is_archive() ) {
 		$title = post_type_archive_title( '', false );
-		if ( $is_site_name_appended ) {
+		if ( $do_append_site_name ) {
 			$title .= $separator . $site_name;
 		}
 		return $title;
