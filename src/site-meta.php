@@ -4,20 +4,20 @@
  *
  * @package Wpinc Socio
  * @author Takuto Yanagida
- * @version 2021-04-12
+ * @version 2021-04-13
  */
 
 namespace wpinc\socio\site_meta;
 
 /**
- * Output the site description.
+ * Outputs the site description.
  */
 function the_site_description() {
 	echo '<meta name="description" content="' . esc_attr( get_site_description() ) . '">' . "\n";
 }
 
 /**
- * Output the site icon images.
+ * Outputs the site icon images.
  *
  * @param string $dir_url The url to image directory.
  */
@@ -56,6 +56,7 @@ function get_the_title( bool $do_append_site_name, string $separator ): string {
 	}
 	return $site_name;
 }
+
 /**
  *
  * Retrieves the website name.
@@ -108,7 +109,7 @@ function get_current_url(): string {
 
 
 /**
- * Strip all tags and custom 'br'.
+ * Strips all tags and custom 'br'.
  *
  * @access private
  *

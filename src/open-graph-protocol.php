@@ -4,7 +4,7 @@
  *
  * @package Wpinc Socio
  * @author Takuto Yanagida
- * @version 2021-04-12
+ * @version 2021-04-13
  */
 
 namespace wpinc\socio\ogp;
@@ -14,7 +14,7 @@ require_once __DIR__ . '/site-meta.php';
 const OGP_NS = 'prefix="og:http://ogp.me/ns#"';
 
 /**
- * Output the open graph protocol meta tags.
+ * Outputs the open graph protocol meta tags.
  *
  * @param array $args {
  *     (Optional) Options.
@@ -126,7 +126,6 @@ function _get_the_image( string $default_image_url, string $size, string $meta_k
 
 
 /**
- *
  * Retrieves the thumbnail image source.
  *
  * @access private

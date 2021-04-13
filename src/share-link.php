@@ -4,7 +4,7 @@
  *
  * @package Wpinc Socio
  * @author Takuto Yanagida
- * @version 2021-04-12
+ * @version 2021-04-13
  */
 
 namespace wpinc\socio\share_link;
@@ -30,7 +30,7 @@ define(
 const ON_CLICK_JS = "navigator.clipboard.writeText(this.dataset.title + ' ' + this.dataset.url);this.classList.add('copied');";
 
 /**
- * Output share links.
+ * Outputs share links.
  *
  * @param array $args {
  *     (Optional) Post navigation arguments.

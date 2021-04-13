@@ -4,7 +4,7 @@
  *
  * @package Wpinc Socio
  * @author Takuto Yanagida
- * @version 2021-04-05
+ * @version 2021-04-13
  */
 
 namespace wpinc\socio\structured_data;
@@ -12,7 +12,7 @@ namespace wpinc\socio\structured_data;
 require_once __DIR__ . '/site-meta.php';
 
 /**
- * Output the structured data.
+ * Outputs the structured data.
  *
  * @param array $args {
  *     (Optional) The data of the website.
@@ -60,7 +60,7 @@ function the_structured_data( array $args = array() ) {
 }
 
 /**
- * Remove empty entries from an array and change key from camel case to snake case.
+ * Removes empty entries from an array and change key from camel case to snake case.
  *
  * @access private
  *
