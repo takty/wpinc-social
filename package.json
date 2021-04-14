@@ -1,7 +1,7 @@
 {
 	"name": "wpinc-socio",
 	"version": "0.1.0",
-	"description": "The Plug-in of WordPress for Social Media",
+	"description": "A Library of WordPress for Social Media",
 	"author": "Takuto Yanagida",
 	"main": "gulpfile.js",
 	"scripts": {
