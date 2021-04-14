@@ -4,10 +4,10 @@
  *
  * @package Wpinc Socio
  * @author Takuto Yanagida
- * @version 2021-04-13
+ * @version 2021-04-15
  */
 
-namespace wpinc\socio\share_link;
+namespace wpinc\socio;
 
 require_once __DIR__ . '/site-meta.php';
 
@@ -27,7 +27,7 @@ define(
 /**
  * The script for 'copy' function.
  */
-const ON_CLICK_JS = "navigator.clipboard.writeText(this.dataset.title + ' ' + this.dataset.url);this.classList.add('copied');";
+const JS_ON_COPY_CLICK = "navigator.clipboard.writeText(this.dataset.title + ' ' + this.dataset.url);this.classList.add('copied');";
 
 /**
  * Outputs share links.
@@ -70,7 +70,7 @@ function the_share_links( array $args = array() ) {
 			$ret .= $args['before_link'] . $link . $args['after_link'] . "\n";
 		} elseif ( 'copy' === $media ) {
 			$lab  = is_string( $lab ) ? $lab : ucfirst( $media );
-			$link = sprintf( '<a data-url="%s" data-title="%s" onclick="%s">%s</a>', esc_url( $url ), esc_attr( $title ), ON_CLICK_JS, $lab );
+			$link = sprintf( '<a data-url="%s" data-title="%s" onclick="%s">%s</a>', esc_url( $url ), esc_attr( $title ), JS_ON_COPY_CLICK, $lab );
 			$ret .= $args['before_link'] . $link . $args['after_link'] . "\n";
 		}
 	}

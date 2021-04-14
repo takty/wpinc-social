@@ -4,10 +4,10 @@
  *
  * @package Wpinc Socio
  * @author Takuto Yanagida
- * @version 2021-04-13
+ * @version 2021-04-15
  */
 
-namespace wpinc\socio\site_meta;
+namespace wpinc\socio;
 
 /**
  * Outputs the site description.
@@ -94,14 +94,10 @@ function get_current_url(): string {
 		return home_url();
 	}
 	// phpcs:disable
-	if ( isset( $_SERVER['HTTP_X_FORWARDED_HOST'] ) ) {  // When reverse proxy exists.
-		$host = wp_unslash( $_SERVER['HTTP_X_FORWARDED_HOST'] );
-	} else {
-		$host = wp_unslash( $_SERVER['HTTP_HOST'] );
-	}
-	$path = wp_unslash( $_SERVER['REQUEST_URI'] );
+	$host = $_SERVER['HTTP_X_FORWARDED_HOST'] ?? $_SERVER['HTTP_HOST'];  // When reverse proxy exists.
+	$req  = $_SERVER['REQUEST_URI'];
 	// phpcs:enable
-	return ( is_ssl() ? 'https://' : 'http://' ) . $host . $path;
+	return ( is_ssl() ? 'https://' : 'http://' ) . wp_unslash( $host ) . wp_unslash( $req );
 }
 
 

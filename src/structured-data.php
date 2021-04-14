@@ -4,10 +4,10 @@
  *
  * @package Wpinc Socio
  * @author Takuto Yanagida
- * @version 2021-04-13
+ * @version 2021-04-15
  */
 
-namespace wpinc\socio\structured_data;
+namespace wpinc\socio;
 
 require_once __DIR__ . '/site-meta.php';
 

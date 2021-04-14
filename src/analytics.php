@@ -4,10 +4,10 @@
  *
  * @package Wpinc Socio
  * @author Takuto Yanagida
- * @version 2021-04-13
+ * @version 2021-04-15
  */
 
-namespace wpinc\socio\analytics;
+namespace wpinc\socio;
 
 /**
  * Outputs google analytics code.
@@ -18,7 +18,7 @@ namespace wpinc\socio\analytics;
 function the_google_analytics_code( string $tracking = '', string $verification = '' ) {
 	if ( empty( $tracking ) ) {
 		if ( is_user_logged_in() ) {
-			_echo_warning();
+			_echo_analytics_warning();
 		}
 	} else {
 		_echo_google_analytics_code( $tracking, $verification );
@@ -26,11 +26,11 @@ function the_google_analytics_code( string $tracking = '', string $verification 
 }
 
 /**
- * Outputs warning.
+ * Outputs warning that indicates any analytics codes are assigned.
  *
  * @access private
  */
-function _echo_warning() {
+function _echo_analytics_warning() {
 	?>
 	<script>
 	window.addEventListener('load',()=>{
