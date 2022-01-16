@@ -4,7 +4,7 @@
  *
  * @package Wpinc Socio
  * @author Takuto Yanagida
- * @version 2021-04-15
+ * @version 2022-01-16
  */
 
 namespace wpinc\socio;
@@ -130,9 +130,9 @@ function _get_the_image( string $default_image_url, string $size, string $meta_k
  *
  * @access private
  *
- * @param string $size     (Optional) The image size.
- * @param ?int   $post_id  (Optional) Post ID.
- * @param string $meta_key (Optional) Meta key of image.
+ * @param string   $size     (Optional) The image size.
+ * @param int|null $post_id  (Optional) Post ID.
+ * @param string   $meta_key (Optional) Meta key of image.
  * @return string The url of the image.
  */
 function _get_thumbnail_src( string $size = 'large', ?int $post_id = null, string $meta_key = '' ): string {
