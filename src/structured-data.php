@@ -4,7 +4,7 @@
  *
  * @package Wpinc Socio
  * @author Takuto Yanagida
- * @version 2021-04-15
+ * @version 2022-01-16
  */
 
 namespace wpinc\socio;
@@ -28,7 +28,7 @@ require_once __DIR__ . '/site-meta.php';
  *     }
  * }
  */
-function the_structured_data( array $args = array() ) {
+function the_structured_data( array $args = array() ): void {
 	$args = array_replace_recursive(
 		array(
 			'@context'    => 'http://schema.org',

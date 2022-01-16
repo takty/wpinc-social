@@ -4,7 +4,7 @@
  *
  * @package Wpinc Socio
  * @author Takuto Yanagida
- * @version 2021-04-15
+ * @version 2022-01-16
  */
 
 namespace wpinc\socio;
@@ -12,7 +12,7 @@ namespace wpinc\socio;
 /**
  * Outputs the site description.
  */
-function the_site_description() {
+function the_site_description(): void {
 	echo '<meta name="description" content="' . esc_attr( get_site_description() ) . '">' . "\n";
 }
 
@@ -21,7 +21,7 @@ function the_site_description() {
  *
  * @param string $dir_url The url to image directory.
  */
-function the_site_icon( string $dir_url ) {
+function the_site_icon( string $dir_url ): void {
 	$dir_url = trailingslashit( $dir_url );
 	echo '<link rel="icon" href="' . esc_attr( $dir_url . 'favicon.ico' ) . '">' . "\n";
 	echo '<link rel="icon" type="image/png" href="' . esc_attr( $dir_url . 'icon-192.png' ) . '">' . "\n";

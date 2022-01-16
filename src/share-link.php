@@ -4,7 +4,7 @@
  *
  * @package Wpinc Socio
  * @author Takuto Yanagida
- * @version 2021-04-15
+ * @version 2022-01-16
  */
 
 namespace wpinc\socio;
@@ -44,7 +44,7 @@ const JS_ON_COPY_CLICK = "navigator.clipboard.writeText(this.title + ' ' + this.
  *     @type string[] 'media'               Social media names.
  * }
  */
-function the_share_links( array $args = array() ) {
+function the_share_links( array $args = array() ): void {
 	$args += array(
 		'before'              => '<ul>',
 		'after'               => '</ul>',

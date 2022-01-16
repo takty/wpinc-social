@@ -29,7 +29,7 @@ const OGP_NS = 'prefix="og:http://ogp.me/ns#"';
  *     @type string 'alt_image_url'       Alternative image URL.
  * }
  */
-function the_ogp( array $args = array() ) {
+function the_ogp( array $args = array() ): void {
 	$args += array(
 		'do_append_site_name' => true,
 		'separator'           => ' - ',

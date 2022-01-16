@@ -4,7 +4,7 @@
  *
  * @package Wpinc Socio
  * @author Takuto Yanagida
- * @version 2021-04-15
+ * @version 2022-01-16
  */
 
 namespace wpinc\socio;
@@ -15,7 +15,7 @@ namespace wpinc\socio;
  * @param string $tracking     The tracking ID of analytics code.
  * @param string $verification The verification code.
  */
-function the_google_analytics_code( string $tracking = '', string $verification = '' ) {
+function the_google_analytics_code( string $tracking = '', string $verification = '' ): void {
 	if ( empty( $tracking ) ) {
 		if ( is_user_logged_in() ) {
 			_echo_analytics_warning();
@@ -30,7 +30,7 @@ function the_google_analytics_code( string $tracking = '', string $verification 
  *
  * @access private
  */
-function _echo_analytics_warning() {
+function _echo_analytics_warning(): void {
 	?>
 	<script>
 	window.addEventListener('load',()=>{
@@ -51,7 +51,7 @@ function _echo_analytics_warning() {
  * @param string $tracking     The tracking ID of analytics code.
  * @param string $verification The verification code.
  */
-function _echo_google_analytics_code( string $tracking, string $verification ) {
+function _echo_google_analytics_code( string $tracking, string $verification ): void {
 	// phpcs:disable
 	?>
 	<script async src="https://www.googletagmanager.com/gtag/js?id=<?php echo esc_attr( $tracking ); ?>"></script>
