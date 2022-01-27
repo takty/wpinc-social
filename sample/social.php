@@ -4,7 +4,7 @@
  *
  * @package Sample
  * @author Takuto Yanagida
- * @version 2022-01-26
+ * @version 2022-01-27
  */
 
 namespace sample;
@@ -22,7 +22,7 @@ require_once __DIR__ . '/socio/structured-data.php';
  * @param string $verification The verification code.
  */
 function the_google_analytics_code( string $tracking = '', string $verification = '' ) {
-	\wpinc\socio\analytics\the_google_analytics_code( $tracking, $verification );
+	\wpinc\socio\the_google_analytics_code( $tracking, $verification );
 }
 
 /**
@@ -42,7 +42,7 @@ function the_google_analytics_code( string $tracking = '', string $verification 
  * }
  */
 function the_ogp( array $args = array() ) {
-	\wpinc\socio\ogp\the_ogp( $args );
+	\wpinc\socio\the_ogp( $args );
 }
 
 /**
@@ -61,14 +61,14 @@ function the_ogp( array $args = array() ) {
  * }
  */
 function the_share_links( array $args = array() ) {
-	\wpinc\socio\share_link\the_share_links( $args );
+	\wpinc\socio\the_share_links( $args );
 }
 
 /**
  * Outputs the site description.
  */
 function the_site_description() {
-	\wpinc\socio\site_meta\the_site_description();
+	\wpinc\socio\the_site_description();
 }
 
 /**
@@ -77,7 +77,7 @@ function the_site_description() {
  * @param string $dir_url The url to image directory.
  */
 function the_site_icon( string $dir_url ) {
-	\wpinc\socio\site_meta\the_site_icon( $dir_url );
+	\wpinc\socio\the_site_icon( $dir_url );
 }
 
 /**
@@ -98,5 +98,5 @@ function the_site_icon( string $dir_url ) {
  * }
  */
 function the_structured_data( array $args = array() ) {
-	\wpinc\socio\structured_data\the_structured_data( $args );
+	\wpinc\socio\the_structured_data( $args );
 }

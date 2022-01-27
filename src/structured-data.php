@@ -4,7 +4,7 @@
  *
  * @package Wpinc Socio
  * @author Takuto Yanagida
- * @version 2022-01-16
+ * @version 2022-01-27
  */
 
 namespace wpinc\socio;
@@ -34,13 +34,13 @@ function the_structured_data( array $args = array() ): void {
 			'@context'    => 'http://schema.org',
 			'@type'       => 'WebSite',
 			'url'         => home_url(),
-			'name'        => \wpinc\socio\site_meta\get_site_name(),
+			'name'        => \wpinc\socio\get_site_name(),
 			'in_language' => get_locale(),
-			'description' => \wpinc\socio\site_meta\get_site_description(),
+			'description' => \wpinc\socio\get_site_description(),
 			'same_as'     => array(),
 			'publisher'   => array(
 				'@type' => 'Organization',
-				'name'  => \wpinc\socio\site_meta\get_site_name(),
+				'name'  => \wpinc\socio\get_site_name(),
 				'logo'  => '',
 			),
 		),

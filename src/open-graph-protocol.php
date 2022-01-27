@@ -4,7 +4,7 @@
  *
  * @package Wpinc Socio
  * @author Takuto Yanagida
- * @version 2022-01-16
+ * @version 2022-01-27
  */
 
 namespace wpinc\socio;
@@ -45,10 +45,10 @@ function the_ogp( array $args = array() ): void {
 	$tw_card = empty( $img_url ) ? 'summary' : 'summary_large_image';
 
 	echo '<meta property="og:type" content="' . esc_attr( is_single() ? 'article' : 'website' ) . '">' . "\n";
-	echo '<meta property="og:url" content="' . esc_attr( \wpinc\socio\site_meta\get_current_url() ) . '">' . "\n";
-	echo '<meta property="og:title" content="' . esc_attr( \wpinc\socio\site_meta\get_the_title( $args['do_append_site_name'], $args['separator'] ) ) . '">' . "\n";
+	echo '<meta property="og:url" content="' . esc_attr( \wpinc\socio\get_current_url() ) . '">' . "\n";
+	echo '<meta property="og:title" content="' . esc_attr( \wpinc\socio\get_the_title( $args['do_append_site_name'], $args['separator'] ) ) . '">' . "\n";
 	echo '<meta property="og:description" content="' . esc_attr( _get_the_description( $args['excerpt_length'], $args['alt_description'] ) ) . '">' . "\n";
-	echo '<meta property="og:site_name" content="' . esc_attr( \wpinc\socio\site_meta\get_site_name() ) . '">' . "\n";
+	echo '<meta property="og:site_name" content="' . esc_attr( \wpinc\socio\get_site_name() ) . '">' . "\n";
 
 	if ( ! empty( $img_url ) ) {
 		echo '<meta property="og:image" content="' . esc_attr( $img_url ) . '">' . "\n";
@@ -88,10 +88,10 @@ function _get_the_description( int $excerpt_length, string $alt_description ): s
 		}
 	}
 	if ( empty( $desc ) ) {
-		$desc = \wpinc\socio\site_meta\get_site_description();
+		$desc = \wpinc\socio\get_site_description();
 	}
 	if ( empty( $desc ) ) {
-		$desc = \wpinc\socio\site_meta\get_site_name();
+		$desc = \wpinc\socio\get_site_name();
 	}
 	return $desc;
 }
