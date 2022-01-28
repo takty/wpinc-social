@@ -4,7 +4,7 @@
  *
  * @package Wpinc Socio
  * @author Takuto Yanagida
- * @version 2022-01-27
+ * @version 2022-01-29
  */
 
 namespace wpinc\socio;
@@ -69,7 +69,7 @@ function the_share_links( array $args = array() ): void {
 			$href = str_replace( $search, $replace, $href );
 			$link = sprintf( '<a href="%s">%s</a>', esc_url( $href ), $lab );
 		} elseif ( 'feed' === $media ) {
-			list( $text, $href ) = _get_feed_link();
+			list( 'text' => $text, 'href' => $href ) = _get_feed_link();
 			if ( ! empty( $href ) ) {
 				$link = sprintf( '<a href="%s" title="%s">%s</a>', esc_url( $href ), esc_attr( $text ), $lab );
 			}
