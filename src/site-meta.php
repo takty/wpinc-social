@@ -4,10 +4,28 @@
  *
  * @package Wpinc Socio
  * @author Takuto Yanagida
- * @version 2022-01-16
+ * @version 2022-02-08
  */
 
 namespace wpinc\socio;
+
+/**
+ * Sets site icon (favicon).
+ *
+ * @param string $dir_url The url to image directory.
+ */
+function set_site_icon( string $dir_url ): void {
+	add_filter(
+		'get_site_icon_url',
+		function () use ( $dir_url ) {
+			return trailingslashit( $dir_url ) . 'favicon.ico';
+		}
+	);
+}
+
+
+// -----------------------------------------------------------------------------
+
 
 /**
  * Outputs the site description.
