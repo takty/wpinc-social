@@ -23,10 +23,16 @@
 		"not dead"
 	],
 	"devDependencies": {
+		"@babel/core": "^7.18.13",
+		"@babel/preset-env": "^7.18.10",
 		"gulp": "^4.0.2",
+		"gulp-babel": "^8.0.0",
 		"gulp-changed": "^4.0.3",
 		"gulp-ignore": "^3.0.0",
 		"gulp-load-plugins": "^2.0.7",
-		"gulp-plumber": "^1.2.1"
+		"gulp-plumber": "^1.2.1",
+		"gulp-preprocess": "^4.0.2",
+		"gulp-rename": "^2.0.0",
+		"gulp-terser": "^2.1.0"
 	}
 }
