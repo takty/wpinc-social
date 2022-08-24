@@ -13,19 +13,24 @@ function wpinc_socio_analytics_initialize(args) {
 	const CFM_OK = 'ok';
 	const CFM_NO = 'no';
 
-	const tagId    = args['tag_id']    ?? '';
-	const limitDay = args['limit_day'] ?? 7;
-	const idDialog = args['id_dialog'] ?? 'wpinc-socio-analytics-dialog';
-	const idAccept = args['id_accept'] ?? 'wpinc-socio-analytics-accept';
-	const idReject = args['id_reject'] ?? 'wpinc-socio-analytics-reject';
+	const tagId          = args['tag_id']         ?? '';
+	const do_show_dialog = args['do_show_dialog'] ?? false;
+	const expired        = args['expired_day']    ?? 7;
+	const idDialog       = args['id_dialog']      ?? 'wpinc-socio-analytics-dialog';
+	const idAccept       = args['id_accept']      ?? 'wpinc-socio-analytics-accept';
+	const idReject       = args['id_reject']      ?? 'wpinc-socio-analytics-reject';
 
 	initTag(tagId);
+	if (!do_show_dialog) {
+		setEnabled();
+		return;
+	}
 
 	onLoad(() => {
 		const dlg = document.getElementById(idDialog) ?? createDialog(idDialog, idAccept, idReject);
 		dlg.setAttribute('hidden', '');
 
-		const cfm = getState(LS_KEY, tagId, limitDay);
+		const cfm = getState(LS_KEY, tagId, expired);
 		if (null !== cfm) {
 			if (CFM_OK === cfm) {
 				setEnabled();
