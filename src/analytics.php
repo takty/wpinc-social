@@ -4,7 +4,7 @@
  *
  * @package Wpinc Socio
  * @author Takuto Yanagida
- * @version 2023-01-21
+ * @version 2023-06-22
  */
 
 namespace wpinc\socio;
@@ -14,7 +14,7 @@ require_once __DIR__ . '/assets/asset-url.php';
 /**
  * Outputs google analytics code.
  *
- * @param array  $args {
+ * @param array       $args {
  *     Arguments.
  *
  *     @type string 'url_to'            URL to this script.
@@ -26,9 +26,9 @@ require_once __DIR__ . '/assets/asset-url.php';
  *     @type string 'id_accept'         Element ID of the accept button. Defaults 'wpinc-socio-analytics-accept'.
  *     @type string 'id_reject'         Element ID of the reject button. Defaults 'wpinc-socio-analytics-reject'.
  * }
- * @param string $site_ver (Optional) The site verification code.
+ * @param string|null $site_ver (Optional) The site verification code.
  */
-function the_google_analytics_code( $args = array(), ?string $site_ver = null ): void {
+function the_google_analytics_code( array $args = array(), ?string $site_ver = null ): void {
 	if ( is_array( $args ) ) {
 		$args += array(
 			'site_verification' => null,
