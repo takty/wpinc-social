@@ -4,7 +4,7 @@
  *
  * @package Wpinc Socio
  * @author Takuto Yanagida
- * @version 2023-06-22
+ * @version 2023-08-31
  */
 
 namespace wpinc\socio;
@@ -14,7 +14,7 @@ require_once __DIR__ . '/assets/asset-url.php';
 /**
  * Outputs google analytics code.
  *
- * @param array       $args {
+ * @param array<string, mixed> $args {
  *     Arguments.
  *
  *     @type string 'url_to'            URL to this script.
@@ -26,22 +26,14 @@ require_once __DIR__ . '/assets/asset-url.php';
  *     @type string 'id_accept'         Element ID of the accept button. Defaults 'wpinc-socio-analytics-accept'.
  *     @type string 'id_reject'         Element ID of the reject button. Defaults 'wpinc-socio-analytics-reject'.
  * }
- * @param string|null $site_ver (Optional) The site verification code.
  */
-function the_google_analytics_code( array $args = array(), ?string $site_ver = null ): void {
-	if ( is_array( $args ) ) {
-		$args += array(
-			'site_verification' => null,
-			'tag_id'            => null,
-			'do_show_dialog'    => false,
-		);
-	} else {  // For backward compatibility.
-		$args = array(
-			'site_verification' => $site_ver,
-			'tag_id'            => (string) $args,
-			'do_show_dialog'    => false,
-		);
-	}
+function the_google_analytics_code( array $args = array() ): void {
+	$args += array(
+		'site_verification' => null,
+		'tag_id'            => null,
+		'do_show_dialog'    => false,
+	);
+
 	$url_to   = untrailingslashit( $args['url_to'] ?? \wpinc\get_file_uri( __DIR__ ) );
 	$site_ver = $args['site_verification'];
 
@@ -82,8 +74,8 @@ function _echo_analytics_warning(): void {
  *
  * @access private
  *
- * @param string $url_to URL to this script.
- * @param array  $args   Arguments or google tag ID.
+ * @param string               $url_to URL to this script.
+ * @param array<string, mixed> $args   Arguments or google tag ID.
  */
 function _echo_google_analytics_code( string $url_to, array $args ): void {
 	?>
@@ -93,7 +85,7 @@ function _echo_google_analytics_code( string $url_to, array $args ): void {
 		'wpinc-socio-analytics',
 		\wpinc\abs_url( $url_to, './assets/js/analytics.min.js' ),
 		array(),
-		filemtime( __DIR__ . '/assets/js/analytics.min.js' ),
+		(string) filemtime( __DIR__ . '/assets/js/analytics.min.js' ),
 		true
 	);
 	$json = wp_json_encode( $args );

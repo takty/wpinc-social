@@ -4,7 +4,7 @@
  *
  * @package Wpinc Socio
  * @author Takuto Yanagida
- * @version 2022-10-28
+ * @version 2023-09-01
  */
 
 namespace wpinc\socio;
@@ -14,8 +14,8 @@ require_once __DIR__ . '/assets/url.php';
 /**
  * Sets site icon (favicon).
  *
- * @param string     $dir_url The url to image directory.
- * @param array|null $icons   Array of icon sizes to icon file names.
+ * @param string                  $dir_url The url to image directory.
+ * @param array<int, string>|null $icons   Array of icon sizes to icon file names.
  */
 function set_site_icon( string $dir_url, ?array $icons = null ): void {
 	$dir_url = trailingslashit( $dir_url );
@@ -120,7 +120,7 @@ function get_site_description(): string {
  */
 function _strip_custom_tags( string $text ): string {
 	// Replace double full-width spaces and br tags to single space.
-	$text = preg_replace( '/　　|<\s*br\s*\/?>/ui', ' ', $text );
+	$text = preg_replace( '/　　|<\s*br\s*\/?>/ui', ' ', $text ) ?? $text;
 	$text = wp_strip_all_tags( $text, true );
 	return $text;
 }
@@ -135,11 +135,21 @@ function _add_timestamp( string $src ): string {
 	if ( strpos( $src, get_template_directory_uri() ) === false ) {
 		return $src;
 	}
-	$removed_src   = strtok( $src, '?' );
+	$removed_src = strtok( $src, '?' );
+	if ( false === $removed_src ) {
+		$removed_src = $src;
+	}
 	$path          = wp_normalize_path( ABSPATH );
 	$resource_file = str_replace( trailingslashit( site_url() ), trailingslashit( $path ), $removed_src );
 	$resource_file = realpath( $resource_file );
-	$fts           = gmdate( 'Ymdhis', filemtime( $resource_file ) );
-	$hash          = hash( 'crc32b', $resource_file . $fts );
+	if ( false === $resource_file ) {
+		return $src;
+	}
+	$fmt = filemtime( $resource_file );
+	if ( false === $fmt ) {
+		return $src;
+	}
+	$fts  = gmdate( 'Ymdhis', $fmt );
+	$hash = hash( 'crc32b', $resource_file . $fts );
 	return add_query_arg( 'v', $hash, $src );
 }

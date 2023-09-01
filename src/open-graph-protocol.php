@@ -4,7 +4,7 @@
  *
  * @package Wpinc Socio
  * @author Takuto Yanagida
- * @version 2022-10-28
+ * @version 2023-09-01
  */
 
 namespace wpinc\socio;
@@ -17,7 +17,7 @@ const OGP_NS = 'prefix="og:http://ogp.me/ns#"';
 /**
  * Outputs the open graph protocol meta tags.
  *
- * @param array $args {
+ * @param array<string, mixed> $args {
  *     (Optional) Options.
  *
  *     @type string 'default_image_url'   Default image URL.
@@ -42,15 +42,19 @@ function the_ogp( array $args = array() ): void {
 		'alt_image_url'       => '',
 	);
 
+	$prop_vs = array(
+		'type'        => is_single() ? 'article' : 'website',
+		'url'         => (string) \wpinc\get_current_url(),
+		'title'       => \wpinc\socio\get_the_title( $args['do_append_site_name'], $args['separator'] ),
+		'description' => _get_the_description( $args['excerpt_length'], $args['alt_description'] ),
+		'site_name'   => \wpinc\socio\get_site_name(),
+	);
 	$img_url = _get_the_image( $args['default_image_url'], $args['image_size'], $args['image_meta_key'], $args['alt_image_url'] );
 	$tw_card = empty( $img_url ) ? 'summary' : 'summary_large_image';
 
-	echo '<meta property="og:type" content="' . esc_attr( is_single() ? 'article' : 'website' ) . '">' . "\n";
-	echo '<meta property="og:url" content="' . esc_attr( \wpinc\get_current_url() ) . '">' . "\n";
-	echo '<meta property="og:title" content="' . esc_attr( \wpinc\socio\get_the_title( $args['do_append_site_name'], $args['separator'] ) ) . '">' . "\n";
-	echo '<meta property="og:description" content="' . esc_attr( _get_the_description( $args['excerpt_length'], $args['alt_description'] ) ) . '">' . "\n";
-	echo '<meta property="og:site_name" content="' . esc_attr( \wpinc\socio\get_site_name() ) . '">' . "\n";
-
+	foreach ( $prop_vs as $prop => $val ) {
+		echo '<meta property="og:' . esc_attr( $prop ) . '" content="' . esc_attr( $val ) . '">' . "\n";
+	}
 	if ( ! empty( $img_url ) ) {
 		echo '<meta property="og:image" content="' . esc_attr( $img_url ) . '">' . "\n";
 		if ( class_exists( 'Simply_Static\Plugin' ) ) {
@@ -80,10 +84,11 @@ function _get_the_description( int $excerpt_length, string $alt_description ): s
 		$text = strip_shortcodes( $text );
 		$text = excerpt_remove_blocks( $text );
 		$text = apply_filters( 'the_content', $text );
-		$text = str_replace( ']]>', ']]&gt;', $text );
+		$text = str_replace( ']]>', ']]&gt;', (string) $text );
+		$text = str_replace( array( "\r\n", "\r", "\n" ), ' ', $text );
 
-		$desc = wp_strip_all_tags( str_replace( array( "\r\n", "\r", "\n" ), ' ', $text ), true );
-		$desc = preg_replace( '/\A[\p{C}\p{Z}]++|[\p{C}\p{Z}]++\z/u', '', $desc );  // Multi-byte trim.
+		$desc = wp_strip_all_tags( $text, true );
+		$desc = preg_replace( '/\A[\p{C}\p{Z}]++|[\p{C}\p{Z}]++\z/u', '', $desc ) ?? $desc;  // Multi-byte trim.
 		if ( mb_strlen( $desc ) > $excerpt_length ) {
 			$desc = mb_substr( $desc, 0, $excerpt_length - 3 ) . '...';
 		}

@@ -4,7 +4,7 @@
  *
  * @package Wpinc Socio
  * @author Takuto Yanagida
- * @version 2022-01-27
+ * @version 2023-08-31
  */
 
 namespace wpinc\socio;
@@ -14,7 +14,7 @@ require_once __DIR__ . '/site-meta.php';
 /**
  * Outputs the structured data.
  *
- * @param array $args {
+ * @param array<string, mixed> $args {
  *     (Optional) The data of the website.
  *
  *     @type string   'url'         The URL.
@@ -64,8 +64,8 @@ function the_structured_data( array $args = array() ): void {
  *
  * @access private
  *
- * @param array $array An array.
- * @return array Filtered array.
+ * @param array<int|string, mixed> $array An array.
+ * @return array<int|string, mixed> Filtered array.
  */
 function _rearrange_array( array $array ): array {
 	$ret = array();
