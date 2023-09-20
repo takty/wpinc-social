@@ -24,8 +24,8 @@
 		"not dead"
 	],
 	"dependencies": {
-		"@babel/core": "^7.22.11",
-		"@babel/preset-env": "^7.22.14",
+		"@babel/core": "^7.22.20",
+		"@babel/preset-env": "^7.22.20",
 		"gulp": "^4.0.2",
 		"gulp-babel": "^8.0.0",
 		"gulp-changed": "^4.0.3",
