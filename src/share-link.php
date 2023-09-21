@@ -4,7 +4,7 @@
  *
  * @package Wpinc Socio
  * @author Takuto Yanagida
- * @version 2023-08-31
+ * @version 2023-09-21
  */
 
 namespace wpinc\socio;
@@ -21,6 +21,7 @@ define(
 		'twitter'  => 'https://twitter.com/intent/tweet?url=<U>&amp;text=<T>',
 		'pocket'   => 'https://getpocket.com/edit?url=<U>&title=<T>',
 		'line'     => 'https://line.me/R/msg/text/?<T>%0d%0a<U>',
+		'x'        => 'https://twitter.com/intent/tweet?url=<U>&amp;text=<T>',
 	)
 );
 
@@ -52,7 +53,7 @@ function the_share_links( array $args = array() ): void {
 		'after_link'          => '</li>',
 		'do_append_site_name' => true,
 		'separator'           => ' - ',
-		'media'               => array( 'facebook', 'twitter', 'pocket', 'line', 'copy', 'feed' ),
+		'media'               => array( 'facebook', 'x', 'pocket', 'line', 'copy', 'feed' ),
 	);
 	$title = (string) \wpinc\socio\get_the_title( $args['do_append_site_name'], $args['separator'] );
 	$url   = (string) \wpinc\get_current_url();
