@@ -4,8 +4,10 @@
  *
  * @package Wpinc Socio
  * @author Takuto Yanagida
- * @version 2023-09-21
+ * @version 2023-11-04
  */
+
+declare(strict_types=1);
 
 namespace wpinc\socio;
 
@@ -30,10 +32,21 @@ define(
  */
 const JS_ON_COPY_CLICK = "navigator.clipboard.writeText(this.title + ' ' + this.dataset.url);this.classList.add('copied');";
 
-/**
+/** phpcs:ignore
  * Outputs share links.
  *
- * @param array<string, mixed> $args {
+ * phpcs:ignore
+ * @param array{
+ *     before?             : string,
+ *     after?              : string,
+ *     before_link?        : string,
+ *     after_link?         : string,
+ *     do_append_site_name?: bool,
+ *     separator?          : string,
+ *     media?              : string[],
+ * } $args (Optional) Post navigation arguments.
+ *
+ * $args {
  *     (Optional) Post navigation arguments.
  *
  *     @type string   'before'              Markup to prepend to the all links.
@@ -55,7 +68,7 @@ function the_share_links( array $args = array() ): void {
 		'separator'           => ' - ',
 		'media'               => array( 'facebook', 'x', 'pocket', 'line', 'copy', 'feed' ),
 	);
-	$title = (string) \wpinc\socio\get_the_title( $args['do_append_site_name'], $args['separator'] );
+	$title = \wpinc\socio\get_the_title( $args['do_append_site_name'], $args['separator'] );
 	$url   = (string) \wpinc\get_current_url();
 
 	$search  = array( '<T>', '<U>' );
@@ -92,7 +105,7 @@ function the_share_links( array $args = array() ): void {
  *
  * @access private
  *
- * @return array<string, string> Feed title and href.
+ * @return array{ text: string, href: string } Feed title and href.
  */
 function _get_feed_link(): array {
 	$temps = array(
@@ -116,18 +129,21 @@ function _get_feed_link(): array {
 		$pto  = get_post_type_object( $post_type );
 		$ptn  = $pto ? $pto->labels->name : '';
 		$text = sprintf( $temps['archive'], get_bloginfo( 'name' ), $temps['separator'], $ptn );
-		$href = (string) get_post_type_archive_feed_link( $post_type );
+		$href = get_post_type_archive_feed_link( $post_type );
 	} elseif ( is_tax() ) {
 		$t = get_queried_object();
 		if ( $t && $t instanceof \WP_Term ) {
 			$tx   = get_taxonomy( $t->taxonomy );
 			$txn  = $tx ? $tx->labels->singular_name : '';
 			$text = sprintf( $temps['tx'], get_bloginfo( 'name' ), $temps['separator'], $t->name, $txn );
-			$href = (string) get_term_feed_link( $t->term_id, $t->taxonomy );
+			$href = get_term_feed_link( $t->term_id, $t->taxonomy );
 		}
 	} elseif ( is_search() ) {
 		$text = sprintf( $temps['search'], get_bloginfo( 'name' ), $temps['separator'], get_search_query( false ) );
-		$href = (string) get_search_feed_link();
+		$href = get_search_feed_link();
+	}
+	if ( ! $href ) {
+		$href = '';
 	}
 	return compact( 'text', 'href' );
 }

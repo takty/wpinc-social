@@ -4,17 +4,31 @@
  *
  * @package Wpinc Socio
  * @author Takuto Yanagida
- * @version 2023-08-31
+ * @version 2023-11-04
  */
+
+declare(strict_types=1);
 
 namespace wpinc\socio;
 
 require_once __DIR__ . '/assets/asset-url.php';
 
-/**
+/** phpcs:ignore
  * Outputs google analytics code.
  *
- * @param array<string, mixed> $args {
+ * phpcs:ignore
+ * @param array{
+ *     url_to?           : string,
+ *     site_verification?: string,
+ *     tag_id?           : string,
+ *     do_show_dialog?   : bool,
+ *     expired_day?      : int,
+ *     id_dialog?        : string,
+ *     id_accept?        : string,
+ *     id_reject?        : string,
+ * } $args Arguments.
+ *
+ * $args {
  *     Arguments.
  *
  *     @type string 'url_to'            URL to this script.
@@ -69,13 +83,21 @@ function _echo_analytics_warning(): void {
 	<?php
 }
 
-/**
+/** phpcs:ignore
  * Outputs google analytics code.
  *
  * @access private
  *
- * @param string               $url_to URL to this script.
- * @param array<string, mixed> $args   Arguments or google tag ID.
+ * @param string $url_to URL to this script.
+ * phpcs:ignore
+ * @param array{
+ *     tag_id        : string,
+ *     do_show_dialog: bool,
+ *     expired_day?  : int,
+ *     id_dialog?    : string,
+ *     id_accept?    : string,
+ *     id_reject?    : string,
+ * } $args Arguments or google tag ID.
  */
 function _echo_google_analytics_code( string $url_to, array $args ): void {
 	?>

@@ -4,8 +4,10 @@
  *
  * @package Wpinc Socio
  * @author Takuto Yanagida
- * @version 2023-09-01
+ * @version 2023-11-04
  */
+
+declare(strict_types=1);
 
 namespace wpinc\socio;
 
@@ -30,7 +32,7 @@ function set_site_icon( string $dir_url, ?array $icons = null ): void {
 	}
 	add_filter(
 		'get_site_icon_url',
-		function ( $url, $size ) use ( $dir_url, $icons ) {
+		function ( $_url, $size ) use ( $dir_url, $icons ) {
 			$icon = $icons[ $size ] ?? '';
 			if ( $icon ) {
 				return _add_timestamp( $dir_url . $icon );
@@ -59,6 +61,8 @@ function the_site_description(): void {
 
 /**
  * Retrieves the title of the current page.
+ *
+ * @psalm-suppress NullableReturnStatement, PossiblyNullOperand, InvalidNullableReturnType
  *
  * @param bool   $do_append_site_name Whether the site name is appended.
  * @param string $separator           Separator between the page title and the site name.

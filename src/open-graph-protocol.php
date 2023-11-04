@@ -4,8 +4,10 @@
  *
  * @package Wpinc Socio
  * @author Takuto Yanagida
- * @version 2023-09-01
+ * @version 2023-11-04
  */
+
+declare(strict_types=1);
 
 namespace wpinc\socio;
 
@@ -14,10 +16,22 @@ require_once __DIR__ . '/site-meta.php';
 
 const OGP_NS = 'prefix="og:http://ogp.me/ns#"';
 
-/**
+/** phpcs:ignore
  * Outputs the open graph protocol meta tags.
  *
- * @param array<string, mixed> $args {
+ * phpcs:ignore
+ * @param array{
+ *     default_image_url?  : string,
+ *     do_append_site_name?: bool,
+ *     separator?          : string,
+ *     excerpt_length?     : int,
+ *     alt_description?    : string,
+ *     image_size?         : string,
+ *     image_meta_key?     : string,
+ *     alt_image_url?      : string,
+ * } $args (Optional) Options.
+ *
+ * $args {
  *     (Optional) Options.
  *
  *     @type string 'default_image_url'   Default image URL.
@@ -68,6 +82,7 @@ function the_ogp( array $args = array() ): void {
  * Retrieves the description of the current page.
  *
  * @access private
+ * @global \WP_Post $post
  *
  * @param int    $excerpt_length  The length of excerpt.
  * @param string $alt_description Alternative description.
@@ -78,16 +93,16 @@ function _get_the_description( int $excerpt_length, string $alt_description ): s
 		return $alt_description;
 	}
 	$desc = '';
+	global $post;
 	if ( ! is_front_page() && is_singular() ) {
-		global $post;
 		$text = get_the_content( '', false, $post );
 		$text = strip_shortcodes( $text );
 		$text = excerpt_remove_blocks( $text );
 		$text = apply_filters( 'the_content', $text );
-		$text = str_replace( ']]>', ']]&gt;', (string) $text );
+		$text = str_replace( ']]>', ']]&gt;', $text );
 		$text = str_replace( array( "\r\n", "\r", "\n" ), ' ', $text );
 
-		$desc = wp_strip_all_tags( $text, true );
+		$desc = wp_strip_all_tags( $text, true );  // @phpstan-ignore-line
 		$desc = preg_replace( '/\A[\p{C}\p{Z}]++|[\p{C}\p{Z}]++\z/u', '', $desc ) ?? $desc;  // Multi-byte trim.
 		if ( mb_strlen( $desc ) > $excerpt_length ) {
 			$desc = mb_substr( $desc, 0, $excerpt_length - 3 ) . '...';
@@ -106,6 +121,7 @@ function _get_the_description( int $excerpt_length, string $alt_description ): s
  * Retrieves the image of the current page.
  *
  * @access private
+ * @global \WP_Post $post
  *
  * @param string $default_image_url Default image URL.
  * @param string $size              The image size.
@@ -117,8 +133,8 @@ function _get_the_image( string $default_image_url, string $size, string $meta_k
 	if ( ! empty( $alt_image_url ) ) {
 		return $alt_image_url;
 	}
+	global $post;
 	if ( is_singular() ) {
-		global $post;
 		$src = _get_thumbnail_src( $size, $post->ID, $meta_key );
 		if ( ! empty( $src ) ) {
 			return $src;
@@ -135,6 +151,7 @@ function _get_the_image( string $default_image_url, string $size, string $meta_k
  * Retrieves the thumbnail image source.
  *
  * @access private
+ * @global \WP_Post $post
  *
  * @param string   $size     (Optional) The image size.
  * @param int|null $post_id  (Optional) Post ID.
@@ -142,8 +159,8 @@ function _get_the_image( string $default_image_url, string $size, string $meta_k
  * @return string The url of the image.
  */
 function _get_thumbnail_src( string $size = 'large', ?int $post_id = null, string $meta_key = '' ): string {
+	global $post;
 	if ( empty( $post_id ) ) {
-		global $post;
 		if ( ! $post ) {
 			return '';
 		}
@@ -153,10 +170,11 @@ function _get_thumbnail_src( string $size = 'large', ?int $post_id = null, strin
 		$tid = get_post_thumbnail_id( $post_id );
 	} else {
 		$tid = get_post_meta( $post_id, $meta_key, true );
+		$tid = is_numeric( $tid ) ? $tid : '';
 	}
 	if ( empty( $tid ) ) {
 		return '';
 	}
-	$url = wp_get_attachment_image_url( $tid, $size );
+	$url = wp_get_attachment_image_url( (int) $tid, $size );
 	return $url ? $url : '';
 }
