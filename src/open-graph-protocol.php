@@ -151,7 +151,7 @@ function _get_the_image( string $default_image_url, string $size, string $meta_k
  * Retrieves the thumbnail image source.
  *
  * @access private
- * @global \WP_Post $post
+ * @global \WP_Post|null $post
  *
  * @param string   $size     (Optional) The image size.
  * @param int|null $post_id  (Optional) Post ID.
