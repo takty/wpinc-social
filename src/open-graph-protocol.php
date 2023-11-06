@@ -4,7 +4,7 @@
  *
  * @package Wpinc Socio
  * @author Takuto Yanagida
- * @version 2023-11-04
+ * @version 2023-11-05
  */
 
 declare(strict_types=1);
@@ -153,14 +153,14 @@ function _get_the_image( string $default_image_url, string $size, string $meta_k
  * @access private
  * @global \WP_Post|null $post
  *
- * @param string   $size     (Optional) The image size.
- * @param int|null $post_id  (Optional) Post ID.
- * @param string   $meta_key (Optional) Meta key of image.
+ * @param string $size     (Optional) The image size.
+ * @param int    $post_id  (Optional) Post ID.
+ * @param string $meta_key (Optional) Meta key of image.
  * @return string The url of the image.
  */
-function _get_thumbnail_src( string $size = 'large', ?int $post_id = null, string $meta_key = '' ): string {
+function _get_thumbnail_src( string $size = 'large', int $post_id = 0, string $meta_key = '' ): string {
 	global $post;
-	if ( empty( $post_id ) ) {
+	if ( ! $post_id ) {
 		if ( ! $post ) {
 			return '';
 		}
