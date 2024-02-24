@@ -4,7 +4,7 @@
  *
  * @package Wpinc Socio
  * @author Takuto Yanagida
- * @version 2023-11-04
+ * @version 2024-02-24
  */
 
 declare(strict_types=1);
@@ -77,11 +77,33 @@ function get_the_title( bool $do_append_site_name, string $separator ): string {
 		}
 		return $title;
 	} elseif ( is_archive() ) {
-		$title = post_type_archive_title( '', false );
-		if ( $do_append_site_name ) {
-			$title .= $separator . $site_name;
+		$title = '';
+		if ( is_year() ) {
+			$title = (string) get_the_date( _x( 'Y', 'yearly archives date format' ) );
+		} elseif ( is_month() ) {
+			$title = (string) get_the_date( _x( 'F Y', 'monthly archives date format' ) );
+		} elseif ( is_day() ) {
+			$title = (string) get_the_date();
+		} elseif ( is_post_type_archive() ) {
+			$title = (string) post_type_archive_title( '', false );
+		} elseif ( is_tax() ) {
+			$title = (string) single_term_title( '', false );
 		}
-		return $title;
+		if ( is_date() || is_tax() ) {
+			$pt = get_post_type();
+			if ( $pt ) {
+				$pto = get_post_type_object( $pt );
+				if ( $pto && $pto->label ) {
+					$title .= $separator . $pto->label;
+				}
+			}
+		}
+		if ( ! empty( $title ) ) {
+			if ( $do_append_site_name ) {
+				$title .= $separator . $site_name;
+			}
+			return $title;
+		}
 	}
 	return $site_name;
 }
