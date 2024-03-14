@@ -4,7 +4,7 @@
  *
  * @package Wpinc Socio
  * @author Takuto Yanagida
- * @version 2023-11-04
+ * @version 2024-03-13
  */
 
 declare(strict_types=1);
@@ -79,18 +79,18 @@ function the_share_links( array $args = array() ): void {
 		$href = SOCIAL_MEDIA_LINKS[ $media ] ?? '';
 		$lab  = is_string( $lab ) ? $lab : ucfirst( $media );
 		$link = '';
-		if ( ! empty( $href ) ) {
+		if ( '' !== $href ) {
 			$href = str_replace( $search, $replace, $href );
 			$link = sprintf( '<a href="%s">%s</a>', esc_url( $href ), $lab );
 		} elseif ( 'feed' === $media ) {
 			list( 'text' => $text, 'href' => $href ) = _get_feed_link();
-			if ( ! empty( $href ) ) {
+			if ( '' !== $href ) {
 				$link = sprintf( '<a href="%s" title="%s">%s</a>', esc_url( $href ), esc_attr( $text ), $lab );
 			}
 		} elseif ( 'copy' === $media ) {
 			$link = sprintf( '<a data-url="%s" title="%s" onclick="%s">%s</a>', esc_url( $url ), esc_attr( $title ), JS_ON_COPY_CLICK, $lab );
 		}
-		if ( ! empty( $link ) ) {
+		if ( '' !== $link ) {
 			$ret .= $args['before_link'] . $link . $args['after_link'] . "\n";
 		}
 	}
@@ -142,7 +142,7 @@ function _get_feed_link(): array {
 		$text = sprintf( $temps['search'], get_bloginfo( 'name' ), $temps['separator'], get_search_query( false ) );
 		$href = get_search_feed_link();
 	}
-	if ( ! $href ) {
+	if ( ! is_string( $href ) ) {
 		$href = '';
 	}
 	return compact( 'text', 'href' );

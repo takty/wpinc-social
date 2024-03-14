@@ -4,7 +4,7 @@
  *
  * @package Wpinc Socio
  * @author Takuto Yanagida
- * @version 2023-11-05
+ * @version 2024-03-14
  */
 
 declare(strict_types=1);
@@ -64,12 +64,12 @@ function the_ogp( array $args = array() ): void {
 		'site_name'   => \wpinc\socio\get_site_name(),
 	);
 	$img_url = _get_the_image( $args['default_image_url'], $args['image_size'], $args['image_meta_key'], $args['alt_image_url'] );
-	$tw_card = empty( $img_url ) ? 'summary' : 'summary_large_image';
+	$tw_card = ( '' === $img_url ) ? 'summary' : 'summary_large_image';
 
 	foreach ( $prop_vs as $prop => $val ) {
 		echo '<meta property="og:' . esc_attr( $prop ) . '" content="' . esc_attr( $val ) . '">' . "\n";
 	}
-	if ( ! empty( $img_url ) ) {
+	if ( '' !== $img_url ) {
 		echo '<meta property="og:image" content="' . esc_attr( $img_url ) . '">' . "\n";
 		if ( class_exists( 'Simply_Static\Plugin' ) ) {
 			echo '<link href="' . esc_attr( $img_url ) . '"><!-- for simply static -->' . "\n";
@@ -89,7 +89,7 @@ function the_ogp( array $args = array() ): void {
  * @return string The description.
  */
 function _get_the_description( int $excerpt_length, string $alt_description ): string {
-	if ( ! empty( $alt_description ) ) {
+	if ( '' !== $alt_description ) {
 		return $alt_description;
 	}
 	$desc = '';
@@ -108,10 +108,10 @@ function _get_the_description( int $excerpt_length, string $alt_description ): s
 			$desc = mb_substr( $desc, 0, $excerpt_length - 3 ) . '...';
 		}
 	}
-	if ( empty( $desc ) ) {
+	if ( '' === $desc ) {
 		$desc = \wpinc\socio\get_site_description();
 	}
-	if ( empty( $desc ) ) {
+	if ( '' === $desc ) {
 		$desc = \wpinc\socio\get_site_name();
 	}
 	return $desc;
@@ -130,13 +130,13 @@ function _get_the_description( int $excerpt_length, string $alt_description ): s
  * @return string The image URL.
  */
 function _get_the_image( string $default_image_url, string $size, string $meta_key, string $alt_image_url ): string {
-	if ( ! empty( $alt_image_url ) ) {
+	if ( '' !== $alt_image_url ) {
 		return $alt_image_url;
 	}
 	global $post;
 	if ( is_singular() ) {
 		$src = _get_thumbnail_src( $size, $post->ID, $meta_key );
-		if ( ! empty( $src ) ) {
+		if ( '' !== $src ) {
 			return $src;
 		}
 	}
@@ -166,15 +166,15 @@ function _get_thumbnail_src( string $size = 'large', int $post_id = 0, string $m
 		}
 		$post_id = $post->ID;
 	}
-	if ( empty( $meta_key ) ) {
+	if ( '' === $meta_key ) {
 		$tid = get_post_thumbnail_id( $post_id );
 	} else {
 		$tid = get_post_meta( $post_id, $meta_key, true );
-		$tid = is_numeric( $tid ) ? $tid : '';
+		$tid = is_numeric( $tid ) ? $tid : false;
 	}
-	if ( empty( $tid ) ) {
+	if ( false === $tid ) {
 		return '';
 	}
 	$url = wp_get_attachment_image_url( (int) $tid, $size );
-	return $url ? $url : '';
+	return is_string( $url ) ? $url : '';
 }

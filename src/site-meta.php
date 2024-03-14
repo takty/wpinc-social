@@ -4,7 +4,7 @@
  *
  * @package Wpinc Socio
  * @author Takuto Yanagida
- * @version 2024-02-24
+ * @version 2024-03-13
  */
 
 declare(strict_types=1);
@@ -91,14 +91,14 @@ function get_the_title( bool $do_append_site_name, string $separator ): string {
 		}
 		if ( is_date() || is_tax() ) {
 			$pt = get_post_type();
-			if ( $pt ) {
+			if ( is_string( $pt ) ) {
 				$pto = get_post_type_object( $pt );
 				if ( $pto && $pto->label ) {
 					$title .= $separator . $pto->label;
 				}
 			}
 		}
-		if ( ! empty( $title ) ) {
+		if ( '' !== $title ) {
 			if ( $do_append_site_name ) {
 				$title .= $separator . $site_name;
 			}

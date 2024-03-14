@@ -4,7 +4,7 @@
  *
  * @package Wpinc Socio
  * @author Takuto Yanagida
- * @version 2023-11-04
+ * @version 2024-03-14
  */
 
 declare(strict_types=1);
@@ -54,13 +54,13 @@ function the_google_analytics_code( array $args = array() ): void {
 	unset( $args['url_to'] );
 	unset( $args['site_verification'] );
 
-	if ( ! $args['tag_id'] ) {
+	if ( ! is_string( $args['tag_id'] ) || '' === $args['tag_id'] ) {  // Check for non-empty-string.
 		if ( is_user_logged_in() ) {
 			_echo_analytics_warning();
 		}
 	} else {
 		_echo_google_analytics_code( $url_to, $args );
-		if ( $site_ver ) {
+		if ( is_string( $site_ver ) && '' !== $site_ver ) {  // Check for non-empty-string.
 			_echo_google_site_verification( $site_ver );
 		}
 	}
